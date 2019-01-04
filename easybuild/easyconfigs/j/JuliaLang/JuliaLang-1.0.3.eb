@@ -1,0 +1,43 @@
+# IT4Innovations 2019
+
+easyblock = 'MakeCp'
+
+name = 'JuliaLang'
+version = '1.0.3'
+
+homepage = 'http://julialang.org'
+description = """Julia is a high-level, high-performance dynamic programming language for technical computing,
+ with syntax that is familiar to users of other technical computing environments.
+ It provides a sophisticated compiler, distributed parallel execution, numerical accuracy,
+ and an extensive mathematical function library. Julia’s Base library, largely written in Julia itself,
+ also integrates mature, best-of-breed open source C and Fortran libraries for linear algebra, random number generation
+ , signal processing, and string processing. In addition, the Julia developer community is contributing a number of external
+ packages through Julia’s built-in package manager at a rapid pace. IJulia, a collaboration between the Jupyter and Julia communities,
+ provides a powerful browser-based graphical notebook interface to Julia."""
+
+toolchain = {'name': 'dummy', 'version': ''}
+
+source_urls = ['https://github.com/JuliaLang/julia/archive/']
+sources = ['v%(version)s.tar.gz']
+
+builddependencies = [
+    ('CMake', '3.13.1')
+]
+
+dependencies = [
+    ('git', '2.19.1')
+]
+
+files_to_copy = ['*']
+
+postinstallcmds = [
+    'mkdir -p %(installdir)s/bin',
+    'ln -s %(installdir)s/usr/bin/julia %(installdir)s/bin/julia',
+]
+
+sanity_check_paths = {
+    'files': ['bin/julia'],
+    'dirs': ['bin', 'usr', 'test']
+}
+
+moduleclass = 'lang'
